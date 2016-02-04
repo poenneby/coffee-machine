@@ -1,7 +1,11 @@
 package com.onneby.coffee;
 
+import com.onneby.coffee.model.Chocolate;
+import com.onneby.coffee.model.Coffee;
+import com.onneby.coffee.model.Tea;
 import org.junit.Test;
 
+import static com.onneby.coffee.CommandTranslator.translate;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -34,47 +38,10 @@ public class CommandTranslatorTest {
         assertThat(translate(new Coffee().withSugar(1))).isEqualTo("C:1:0");
     }
 
-    private String translate(Drink drink) {
-        StringBuilder sb = new StringBuilder();
-        if (drink instanceof Tea) {
-            sb.append("T");
-        } else if (drink instanceof Coffee) {
-            sb.append("C");
-        }
-        if (drink.hasSugar()) {
-            sb.append(String.format(":%d:0", drink.getNumberOfSugars()));
-        } else {
-            sb.append("::");
-        }
-        return sb.toString();
+    @Test
+    public void translate_chocolate_with_one_sugar() {
+        assertThat(translate(new Chocolate().withSugar(1))).isEqualTo("H:1:0");
     }
 
 
-
-
-
-
-    private class Drink {
-        private int numberOfSugars;
-
-        public Drink withSugar(int numberOfSugars) {
-            this.numberOfSugars = numberOfSugars;
-            return this;
-        }
-
-        public boolean hasSugar() {
-            return this.numberOfSugars > 0;
-        }
-
-        public int getNumberOfSugars() {
-            return numberOfSugars;
-        }
-    }
-
-    private class Coffee extends Drink {
-    }
-
-    private class Tea extends Drink {
-
-    }
 }
