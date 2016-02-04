@@ -1,6 +1,6 @@
 package com.onneby.coffee.model;
 
-public abstract class Drink {
+public abstract class Drink implements Command {
     private int numberOfSugars;
 
     public Drink withSugar(int numberOfSugars) {
