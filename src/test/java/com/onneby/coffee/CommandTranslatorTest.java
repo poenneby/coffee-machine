@@ -24,18 +24,40 @@ public class CommandTranslatorTest {
         assertThat(translate(new Tea().withSugar(2))).isEqualTo("T:2:0");
     }
 
-    private String translate(Tea tea) {
-        if (tea.hasSugar()) {
-            return String.format("T:%d:0", tea.getNumberOfSugars());
+    @Test
+    public void translate_coffee() {
+        assertThat(translate(new Coffee())).isEqualTo("C::");
+    }
+
+    @Test
+    public void translate_coffee_with_one_sugar() {
+        assertThat(translate(new Coffee().withSugar(1))).isEqualTo("C:1:0");
+    }
+
+    private String translate(Drink drink) {
+        StringBuilder sb = new StringBuilder();
+        if (drink instanceof Tea) {
+            sb.append("T");
+        } else if (drink instanceof Coffee) {
+            sb.append("C");
         }
-        return "T::";
+        if (drink.hasSugar()) {
+            sb.append(String.format(":%d:0", drink.getNumberOfSugars()));
+        } else {
+            sb.append("::");
+        }
+        return sb.toString();
     }
 
 
-    private class Tea {
+
+
+
+
+    private class Drink {
         private int numberOfSugars;
 
-        public Tea withSugar(int numberOfSugars) {
+        public Drink withSugar(int numberOfSugars) {
             this.numberOfSugars = numberOfSugars;
             return this;
         }
@@ -47,5 +69,12 @@ public class CommandTranslatorTest {
         public int getNumberOfSugars() {
             return numberOfSugars;
         }
+    }
+
+    private class Coffee extends Drink {
+    }
+
+    private class Tea extends Drink {
+
     }
 }
