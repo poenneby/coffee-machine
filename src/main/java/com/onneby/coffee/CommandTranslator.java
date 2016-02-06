@@ -4,16 +4,15 @@ import com.onneby.coffee.model.*;
 
 public class CommandTranslator {
 
-    public static String translate(Command command) {
+    public static String translate(Drink drink) {
         StringBuilder sb = new StringBuilder();
-        if (command instanceof Tea) {
+        if (drink instanceof Tea) {
             sb.append("T");
-        } else if (command instanceof Coffee) {
+        } else if (drink instanceof Coffee) {
             sb.append("C");
-        } else if (command instanceof Chocolate) {
+        } else if (drink instanceof Chocolate) {
             sb.append("H");
         }
-        Drink drink = (Drink) command;
         if (drink.hasSugar()) {
             sb.append(String.format(":%d:0", drink.getNumberOfSugars()));
         } else {
