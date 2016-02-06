@@ -12,19 +12,12 @@ public class CommandTranslator {
             sb.append("C");
         } else if (command instanceof Chocolate) {
             sb.append("H");
-        } else if (command instanceof Message) {
-            sb.append("M");
         }
-        if (command instanceof Drink) {
-            Drink drink = (Drink)command;
-            if (drink.hasSugar()) {
-                sb.append(String.format(":%d:0", drink.getNumberOfSugars()));
-            } else {
-                sb.append("::");
-            }
+        Drink drink = (Drink) command;
+        if (drink.hasSugar()) {
+            sb.append(String.format(":%d:0", drink.getNumberOfSugars()));
         } else {
-            Message message = (Message) command;
-            sb.append(String.format(":%s", message.getContent()));
+            sb.append("::");
         }
 
         return sb.toString();

@@ -2,7 +2,6 @@ package com.onneby.coffee;
 
 import com.onneby.coffee.model.Chocolate;
 import com.onneby.coffee.model.Coffee;
-import com.onneby.coffee.model.Message;
 import com.onneby.coffee.model.Tea;
 import org.junit.Test;
 
@@ -42,11 +41,6 @@ public class CommandTranslatorTest {
     @Test
     public void translate_chocolate_with_one_sugar() {
         assertThat(translate(new Chocolate().withSugar(1))).isEqualTo("H:1:0");
-    }
-
-    @Test
-    public void translate_message() {
-        assertThat(translate(new Message().withContent("Hello!"))).isEqualTo("M:Hello!");
     }
 
 
