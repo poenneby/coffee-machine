@@ -2,7 +2,6 @@ package com.onneby.coffee.model;
 
 public abstract class Drink {
     private int numberOfSugars;
-    private String type;
 
     public Drink withSugar(int numberOfSugars) {
         this.numberOfSugars = numberOfSugars;
